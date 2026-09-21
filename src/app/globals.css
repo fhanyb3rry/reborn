@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+:root {
+  --reborn-red: #c40414;
+  --reborn-red-dark: #8a0210;
+  --reborn-black: #101010;
+  --reborn-cream: #e7e0d3;
+  --reborn-paper: #f4efe4;
+  --reborn-ink: #171310;
+  --reborn-ink-soft: #4a423a;
+  --reborn-hairline: #d8cfbd;
+}
+
+@theme inline {
+  --color-red: var(--reborn-red);
+  --color-red-dark: var(--reborn-red-dark);
+  --color-ink: var(--reborn-ink);
+  --color-ink-soft: var(--reborn-ink-soft);
+  --color-cream: var(--reborn-cream);
+  --color-paper: var(--reborn-paper);
+  --color-hairline: var(--reborn-hairline);
+  --font-display: var(--font-playfair);
+  --font-serif: var(--font-source-serif);
+  --font-sans: var(--font-inter);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--reborn-paper);
+  color: var(--reborn-ink);
+}
+
+::selection {
+  background: var(--reborn-red);
+  color: var(--reborn-cream);
+}
+
+.dropcap::first-letter {
+  font-family: var(--font-display);
+  font-weight: 900;
+  float: left;
+  font-size: 4.5rem;
+  line-height: 0.82;
+  padding-right: 0.35rem;
+  padding-top: 0.2rem;
+  color: var(--reborn-red);
+}
