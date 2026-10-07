@@ -1,12 +1,11 @@
 import Image from "next/image";
 import { FlameIcon } from "./FlameIcon";
-import { article } from "@/content/article";
 
 export function Hero() {
   return (
     <section
       id="top"
-      className="relative overflow-hidden border-b border-hairline bg-paper px-6 pb-20 pt-16 sm:pt-24"
+      className="relative overflow-hidden border-b border-hairline bg-paper px-6 pb-14 pt-14 sm:pt-20"
     >
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.05]"
@@ -33,14 +32,6 @@ export function Hero() {
           Revista REBORN
           <FlameIcon className="h-3.5 w-3.5" />
         </span>
-
-        <h1 className="font-display text-4xl font-black leading-[1.08] tracking-tight text-ink sm:text-5xl md:text-6xl">
-          {article.titleEs}
-        </h1>
-
-        <p className="mt-5 max-w-2xl font-serif text-lg italic leading-relaxed text-ink-soft sm:text-xl">
-          {article.titleEn}
-        </p>
 
         <div className="mt-10 flex items-center gap-4">
           <span className="h-px w-16 bg-hairline sm:w-24" />

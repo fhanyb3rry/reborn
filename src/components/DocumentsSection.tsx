@@ -1,5 +1,3 @@
-import { SectionLabel } from "./SectionLabel";
-
 const documents = [
   { title: "Aviso de privacidad", href: "/docs/aviso-de-privacidad.pdf" },
   {
@@ -8,10 +6,6 @@ const documents = [
   },
   {
     title: "Capítulo: Ética Bonafont",
-    href: "/docs/capitulo-etica-bonafont.docx",
-  },
-  {
-    title: "Capítulo: Ética Bonafont (PDF)",
     href: "/docs/capitulo-etica-bonafont.pdf",
   },
 ];
@@ -20,9 +14,8 @@ export function DocumentsSection() {
   return (
     <section id="documentos" className="border-t border-hairline bg-paper px-6 py-16 sm:py-20">
       <div className="mx-auto max-w-3xl">
-        <SectionLabel label="Documentos" />
 
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {documents.map((doc) => {
             const ext = doc.href.split(".").pop()?.toUpperCase();
             return (

@@ -23,9 +23,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "REBORN — Principios éticos para una empresa responsable: Bonafont",
-  description:
-    "La ética empresarial representa un elemento fundamental para que las organizaciones desarrollen sus actividades de manera responsable. Treinta principios éticos aplicables al contexto de Bonafont.",
+  title: "REBORN",
+  description: "Revista REBORN",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
