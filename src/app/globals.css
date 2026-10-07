@@ -1,24 +1,39 @@
 @import "tailwindcss";
 
+/* Tema oscuro por defecto */
 :root {
-  --reborn-red: #c40414;
-  --reborn-red-dark: #8a0210;
-  --reborn-black: #101010;
-  --reborn-cream: #e7e0d3;
-  --reborn-paper: #f4efe4;
-  --reborn-ink: #171310;
-  --reborn-ink-soft: #4a423a;
-  --reborn-hairline: #d8cfbd;
+  --bg: #0b0909;
+  --surface: #131010;
+  --sidebar: #0e0b0b;
+  --fg: #f4ece4;
+  --muted: #a89d95;
+  --line: #2d2424;
+  --red: #d4101f;
+  --red-text: #ee2a3a;
+  --glow: rgba(196, 4, 20, 0.16);
+}
+
+:root[data-theme="light"] {
+  --bg: #f6efe9;
+  --surface: #fdf9f5;
+  --sidebar: #fbf6f1;
+  --fg: #1a1311;
+  --muted: #6b5d56;
+  --line: #e6d9cf;
+  --red: #b3081a;
+  --red-text: #b3081a;
+  --glow: rgba(240, 150, 150, 0.35);
 }
 
 @theme inline {
-  --color-red: var(--reborn-red);
-  --color-red-dark: var(--reborn-red-dark);
-  --color-ink: var(--reborn-ink);
-  --color-ink-soft: var(--reborn-ink-soft);
-  --color-cream: var(--reborn-cream);
-  --color-paper: var(--reborn-paper);
-  --color-hairline: var(--reborn-hairline);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-sidebar: var(--sidebar);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-red: var(--red);
+  --color-red-text: var(--red-text);
   --font-display: var(--font-playfair);
   --font-serif: var(--font-source-serif);
   --font-sans: var(--font-inter);
@@ -28,23 +43,130 @@ html {
   scroll-behavior: smooth;
 }
 
+/* En pantallas de escritorio todo (rem) escala con la ventana, para que
+   en laptops al 100% de zoom se vea completo y proporcionado. */
+@media (min-width: 1024px) {
+  html {
+    font-size: clamp(11px, min(1.05vw, 1.7vh), 16px);
+  }
+}
+
 body {
-  background: var(--reborn-paper);
-  color: var(--reborn-ink);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 60% 40% at 85% 0%, var(--glow), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 0% 100%, var(--glow), transparent 70%);
+  background-attachment: fixed;
+  color: var(--fg);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.theme-icon-moon {
+  display: none;
+}
+
+:root[data-theme="light"] .theme-icon-moon {
+  display: block;
+}
+
+:root[data-theme="light"] .theme-icon-sun {
+  display: none;
+}
+
+.logo-for-light {
+  display: none;
+}
+
+:root[data-theme="light"] .logo-for-light {
+  display: block;
+}
+
+:root[data-theme="light"] .logo-for-dark {
+  display: none;
 }
 
 ::selection {
-  background: var(--reborn-red);
-  color: var(--reborn-cream);
+  background: var(--red);
+  color: #fff;
 }
 
-.dropcap::first-letter {
-  font-family: var(--font-display);
-  font-weight: 900;
-  float: left;
-  font-size: 4.5rem;
-  line-height: 0.82;
-  padding-right: 0.35rem;
-  padding-top: 0.2rem;
-  color: var(--reborn-red);
+/* ---------- Animaciones ---------- */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.45; transform: scale(0.75) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.15) rotate(18deg); }
+}
+
+@keyframes sparkle-float {
+  0%, 100% { opacity: 0.6; transform: translateY(0) scale(0.85) rotate(0deg); }
+  50% { opacity: 1; transform: translateY(-6px) scale(1.2) rotate(90deg); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes drift {
+  from { transform: scale(1); }
+  to { transform: scale(1.07); }
+}
+
+.sparkle-twinkle {
+  animation: twinkle 3.2s ease-in-out infinite;
+}
+
+.sparkle-float {
+  animation: sparkle-float 4.5s ease-in-out infinite;
+}
+
+.fade-up {
+  opacity: 0;
+  animation: fade-up 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.banner-drift {
+  animation: drift 18s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sparkle-twinkle,
+  .sparkle-float,
+  .banner-drift {
+    animation: none;
+  }
+  .fade-up {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* Flor de fondo del encabezado: se desvanece hacia la izquierda y abajo,
+   y en modo oscuro se oscurece para no quitarle presencia al título. */
+.hero-flower {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 60%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 60%);
+  opacity: 0.55;
+}
+
+.hero-flower-fade {
+  -webkit-mask-image: linear-gradient(to bottom, #000 65%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 65%, transparent 100%);
+}
+
+.hero-flower img {
+  filter: brightness(0.38) contrast(1.1) saturate(0.9);
+}
+
+:root[data-theme="light"] .hero-flower {
+  opacity: 0.8;
+}
+
+:root[data-theme="light"] .hero-flower img {
+  filter: none;
+}
+
+@media (max-width: 640px) {
+  .hero-flower {
+    opacity: 0.3;
+  }
 }
